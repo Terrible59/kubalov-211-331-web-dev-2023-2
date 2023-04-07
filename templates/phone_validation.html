@@ -1,0 +1,21 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h1 class="mt-5">Валидация телефона</h1>
+        <form method="post" action="{{ url_for('phone_validation') }}" class="mt-4">
+            <div class="form-group">
+                <label for="phone_number">Номер телефона:</label>
+                <input type="tel" class="form-control{% if error_text %} is-invalid{% endif %}" id="phone_number" name="phone_number">
+                {% if error_text %}
+                    <div class="invalid-feedback">{{ error_text }}</div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Проверить</button>
+        </form>
+        {% if formatted_number %}
+            <div class="mt-4">
+                <h2>Форматированный номер телефона:</h2>
+                <p>{{ formatted_number }}</p>
+            </div>
+        {% endif %}
+{% endblock %}
